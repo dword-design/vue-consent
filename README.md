@@ -1,12 +1,12 @@
 <!-- TITLE/ -->
-# vue-consent
+# @dword-design/vue-consent
 <!-- /TITLE -->
 
 <!-- BADGES/ -->
   <p>
-    <a href="https://npmjs.org/package/vue-consent">
+    <a href="https://npmjs.org/package/@dword-design/vue-consent">
       <img
-        src="https://img.shields.io/npm/v/vue-consent.svg"
+        src="https://img.shields.io/npm/v/@dword-design/vue-consent.svg"
         alt="npm version"
       >
     </a><img src="https://img.shields.io/badge/os-linux%20%7C%C2%A0macos%20%7C%C2%A0windows-blue" alt="Linux macOS Windows compatible"><a href="https://github.com/dword-design/vue-consent/actions">
@@ -58,10 +58,10 @@
 
 ```bash
 # npm
-$ npm install vue-consent
+$ npm install @dword-design/vue-consent
 
 # Yarn
-$ yarn add vue-consent
+$ yarn add @dword-design/vue-consent
 ```
 <!-- /INSTALL -->
 
