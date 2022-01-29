@@ -1,0 +1,35 @@
+{
+  "name": "@dword-design/vue-consent",
+  "version": "1.0.0",
+  "repository": "dword-design/vue-consent",
+  "funding": "https://github.com/sponsors/dword-design",
+  "license": "MIT",
+  "author": "Sebastian Landwehr <info@sebastianlandwehr.com>",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "checkUnknownFiles": "base checkUnknownFiles",
+    "commit": "base commit",
+    "dev": "base dev",
+    "lint": "base lint",
+    "prepare": "base prepare",
+    "prepublishOnly": "base prepublishOnly",
+    "test": "base test"
+  },
+  "dependencies": {
+    "@dword-design/functions": "^4.0.7",
+    "js-cookie": "^2.0.0",
+    "parse-domain": "^3.0.0"
+  },
+  "devDependencies": {
+    "@dword-design/base": "^8.6.12"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
