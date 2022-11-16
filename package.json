@@ -24,7 +24,7 @@
     "parse-domain": "^3.0.0"
   },
   "devDependencies": {
-    "@dword-design/base": "^8.6.12"
+    "@dword-design/base": "^9.0.0"
   },
   "engines": {
     "node": ">=12"
