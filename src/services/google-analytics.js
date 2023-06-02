@@ -1,8 +1,13 @@
-import { join, replace } from '@dword-design/functions'
 import Cookie from 'js-cookie'
 import { parseDomain, ParseResultType } from 'parse-domain'
 
 export default (settings, config) => {
+  if (!config.id) {
+    throw new Error('Missing id for Google Analytics.')
+  }
+  if (typeof window === 'undefined') {
+    return
+  }
   if (!settings.statistics) {
     window[`ga-disable-${config.id}`] = true
 
@@ -10,10 +15,10 @@ export default (settings, config) => {
 
     const domain =
       parsedDomain.type === ParseResultType.Listed
-        ? [parsedDomain.domain, ...parsedDomain.topLevelDomains] |> join('.')
+        ? [parsedDomain.domain, ...parsedDomain.topLevelDomains].join('.')
         : document.domain
     Cookie.remove('_ga', { domain, path: '/' })
-    Cookie.remove(`_ga_gid_${config.id |> replace(/-/g, '_')}`, {
+    Cookie.remove(`_ga_gid_${config.id.replace(/-/g, '_')}`, {
       domain,
       path: '/',
     })

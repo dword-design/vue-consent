@@ -1,3 +1,3 @@
-import googleAnalytics from './google-analytics'
+import googleAnalytics from './google-analytics.js'
 
 export default { googleAnalytics }
