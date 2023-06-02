@@ -17,7 +17,6 @@
     "depcheck": "base depcheck",
     "dev": "base dev",
     "lint": "base lint",
-    "playground": "cd playground && nuxt dev",
     "prepare": "base prepare",
     "prepublishOnly": "base prepublishOnly",
     "test": "base test"

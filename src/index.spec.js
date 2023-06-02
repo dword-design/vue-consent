@@ -9,17 +9,17 @@ import kill from 'tree-kill-promise'
 
 export default tester(
   {
-    async modal() {
+    async open() {
       await outputFiles({
         'pages/index.vue': endent`
           <template>
-            <button v-if="$consent.isOpened" class="foo" @click="$consent.isOpened = false" />
+            <button v-if="$consent.isOpened.value" class="foo" @click="$consent.close()" />
           </template>
 
           <script>
           export default {
             mounted() {
-              this.$consent.isOpened = true
+              this.$consent.open()
             }
           }
           </script>
@@ -29,11 +29,11 @@ export default tester(
 
           import Self from '../../src/index.js'
 
-          export default defineNuxtPlugin(({ vueApp }) => vueApp.use(Self, { services: { googleAnalytics: {} } }))
+          export default defineNuxtPlugin(({ vueApp }) => vueApp.use(Self, { services: { googleAnalytics: { id: 'foo' } } }))
         `,
       })
 
-      const nuxt = execaCommand('nuxt dev', { env: { NODE_ENV: '' } })
+      const nuxt = execaCommand('nuxt dev')
       try {
         await nuxtDevReady()
         await this.page.goto('http://localhost:3000')
@@ -69,7 +69,7 @@ export default tester(
         `,
       })
 
-      const nuxt = execaCommand('nuxt dev', { env: { NODE_ENV: '' } })
+      const nuxt = execaCommand('nuxt dev')
       try {
         await nuxtDevReady()
         await this.page.goto('http://localhost:3000')
