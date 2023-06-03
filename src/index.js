@@ -1,33 +1,30 @@
 import { isEqual } from 'lodash-es'
-import { ref } from 'vue'
+import { computed, reactive } from 'vue'
 
 import services from './services/index.js'
 
 export default {
   install: async (app, options) => {
-    const isOpened = ref(false)
-    app.config.globalProperties.$consent = {
-      close: () => (isOpened.value = false),
-      isOpened,
-      open: () => (isOpened.value = true),
-      toggle: () => (isOpened.value = !isOpened.value),
-    }
-    Object.defineProperty(app.config.globalProperties.$consent, 'settings', {
-      get: () => JSON.parse(localStorage.getItem('consent') || '{}'),
-      set: settings => {
-        if (isEqual(settings, app.config.globalProperties.$consent.settings)) {
-          return
-        }
-        localStorage.setItem('consent', JSON.stringify(settings))
-        isOpened.value = false
-        window.location.reload()
-      },
+    const $consent = reactive({
+      close: () => ($consent.isOpened = false),
+      isOpened: false,
+      open: () => ($consent.isOpened = true),
+      settings: computed({
+        get: () => JSON.parse(localStorage.getItem('consent') || '{}'),
+        set: settings => {
+          if (isEqual(settings, $consent.settings)) {
+            return
+          }
+          localStorage.setItem('consent', JSON.stringify(settings))
+          $consent.isOpened = false
+          window.location.reload()
+        },
+      }),
+      toggle: () => ($consent.isOpened = !$consent.isOpened),
     })
+    app.config.globalProperties.$consent = $consent
     for (const name of Object.keys(services)) {
-      await services[name](
-        app.config.globalProperties.$consent.settings,
-        options.services[name],
-      )
+      await services[name]($consent.settings, options.services[name])
     }
   },
 }

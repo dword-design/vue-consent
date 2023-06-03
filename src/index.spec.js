@@ -13,7 +13,7 @@ export default tester(
       await outputFiles({
         'pages/index.vue': endent`
           <template>
-            <button v-if="$consent.isOpened.value" class="foo" @click="$consent.close()" />
+            <button v-if="$consent.isOpened" class="foo" @click="$consent.close()" />
           </template>
 
           <script>
