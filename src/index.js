@@ -1,28 +1,30 @@
-import services from './services'
+import { isEqual } from 'lodash-es'
+import { computed, reactive } from 'vue'
+
+import services from './services/index.js'
 
 export default {
-  install: async (Vue, options) => {
-    const state = Vue.observable({
-      close: () => (state.isOpened = false),
+  install: async (app, options) => {
+    const $consent = reactive({
+      close: () => ($consent.isOpened = false),
       isOpened: false,
-      open: () => (state.isOpened = true),
-      toggle: () => (state.isOpened = !state.isOpened),
+      open: () => ($consent.isOpened = true),
+      settings: computed({
+        get: () => JSON.parse(localStorage.getItem('consent') || '{}'),
+        set: settings => {
+          if (isEqual(settings, $consent.settings)) {
+            return
+          }
+          localStorage.setItem('consent', JSON.stringify(settings))
+          $consent.isOpened = false
+          window.location.reload()
+        },
+      }),
+      toggle: () => ($consent.isOpened = !$consent.isOpened),
     })
-    Object.defineProperty(state, 'settings', {
-      get: () => JSON.parse(localStorage.getItem('consent') || '{}'),
-      set: settings => {
-        localStorage.setItem('consent', JSON.stringify(settings))
-        state.isOpened = false
-        window.location.reload()
-      },
-    })
-    if (!Object.prototype.hasOwnProperty.call(Vue.prototype, '$consent')) {
-      Object.defineProperty(Vue.prototype, '$consent', { get: () => state })
-    }
-    if (typeof window !== 'undefined') {
-      for (const name of Object.keys(services)) {
-        await services[name](state.settings, options.services[name])
-      }
+    app.config.globalProperties.$consent = $consent
+    for (const name of Object.keys(services)) {
+      await services[name]($consent.settings, options.services[name])
     }
   },
 }
