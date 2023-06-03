@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/dword-design/vue-consent/compare/v1.0.1...v2.0.0) (2023-06-03)
+
+
+### Bug Fixes
+
+* lock file maintenance ([#9](https://github.com/dword-design/vue-consent/issues/9)) ([c40ca0d](https://github.com/dword-design/vue-consent/commit/c40ca0d3165aa4bd9008e4db5f58d32f0e9dbe97))
+
+
+### BREAKING CHANGES
+
+* drop node 14, vue 3
+
 ## [1.0.1](https://github.com/dword-design/vue-consent/compare/v1.0.0...v1.0.1) (2023-03-24)
 
 
