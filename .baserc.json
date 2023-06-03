@@ -5,5 +5,7 @@
     "rules": {
       "import/no-unresolved": ["error", { "ignore": ["#imports"] }]
     }
-  }
+  },
+  "supportedNodeVersions": [16, 18],
+  "nodeVersion": 18
 }
