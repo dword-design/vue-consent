@@ -1,8 +1,10 @@
-import { endent } from '@dword-design/functions'
+import { endent, property } from '@dword-design/functions'
 import tester from '@dword-design/tester'
 import testerPluginPuppeteer from '@dword-design/tester-plugin-puppeteer'
 import testerPluginTmpDir from '@dword-design/tester-plugin-tmp-dir'
+import axios from 'axios'
 import { execaCommand } from 'execa'
+import { JSDOM } from 'jsdom'
 import nuxtDevReady from 'nuxt-dev-ready'
 import outputFiles from 'output-files'
 import kill from 'tree-kill-promise'
@@ -25,10 +27,16 @@ export default tester(
         `,
       })
 
-      const nuxt = execaCommand('nuxt dev', { stdio: 'inherit' })
+      const nuxt = execaCommand('nuxt dev')
       try {
         await nuxtDevReady()
-        await new Promise(resolve => setTimeout(resolve, 30000))
+
+        const doc = new JSDOM(
+          axios.get('http://localhost:3000') |> await |> property('data'),
+        ).window.document
+        expect(doc.querySelector('.foo').textContent).toEqual(
+          JSON.stringify({}),
+        )
         await this.page.goto('http://localhost:3000')
         await this.page.evaluate(() =>
           localStorage.setItem('consent', JSON.stringify({ statistics: true })),
