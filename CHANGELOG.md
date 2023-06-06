@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/dword-design/vue-consent/compare/v2.0.0...v2.0.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* fix ssr ([#18](https://github.com/dword-design/vue-consent/issues/18)) ([b561dd4](https://github.com/dword-design/vue-consent/commit/b561dd464b29df6959b6b5477d49221d5165dc9a))
+
 # [2.0.0](https://github.com/dword-design/vue-consent/compare/v1.0.1...v2.0.0) (2023-06-03)
 
 
