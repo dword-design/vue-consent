@@ -10,7 +10,12 @@ export default {
       isOpened: false,
       open: () => ($consent.isOpened = true),
       settings: computed({
-        get: () => JSON.parse(localStorage.getItem('consent') || '{}'),
+        get: () => {
+          console.log(window)
+          console.log('foo bar')
+
+          return JSON.parse(localStorage.getItem('consent') || '{}')
+        },
         set: settings => {
           if (isEqual(settings, $consent.settings)) {
             return

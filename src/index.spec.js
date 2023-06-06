@@ -9,6 +9,40 @@ import kill from 'tree-kill-promise'
 
 export default tester(
   {
+    async 'get settings'() {
+      await outputFiles({
+        'pages/index.vue': endent`
+          <template>
+            <div class="foo">{{ JSON.stringify($consent.settings) }}</div>
+          </template>
+        `,
+        'plugins/plugin.js': endent`
+          import { defineNuxtPlugin } from '#imports'
+
+          import Self from '../../src/index.js'
+
+          export default defineNuxtPlugin(({ vueApp }) => vueApp.use(Self, { services: { googleAnalytics: {} } }))
+        `,
+      })
+
+      const nuxt = execaCommand('nuxt dev', { stdio: 'inherit' })
+      try {
+        await nuxtDevReady()
+        await new Promise(resolve => setTimeout(resolve, 30000))
+        await this.page.goto('http://localhost:3000')
+        await this.page.evaluate(() =>
+          localStorage.setItem('consent', JSON.stringify({ statistics: true })),
+        )
+        await this.page.goto('http://localhost:3000')
+
+        const foo = await this.page.waitForSelector('.foo')
+        expect(await foo.evaluate(el => el.innerText)).toEqual(
+          JSON.stringify({ statistics: true }),
+        )
+      } finally {
+        await kill(nuxt.pid)
+      }
+    },
     async open() {
       await outputFiles({
         'pages/index.vue': endent`
