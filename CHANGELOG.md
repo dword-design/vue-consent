@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/dword-design/vue-consent/compare/v2.0.1...v2.0.2) (2023-06-15)
+
+
+### Bug Fixes
+
+* foo ([016875c](https://github.com/dword-design/vue-consent/commit/016875cd0df24890167055c6099bec4815c8e068))
+
 ## [2.0.1](https://github.com/dword-design/vue-consent/compare/v2.0.0...v2.0.1) (2023-06-06)
 
 
