@@ -6,7 +6,6 @@ import services from './services/index.js'
 export default {
   install: async (app, options) => {
     const $consent = reactive({
-      close: () => ($consent.isOpened = false),
       isOpened: false,
       open: () => ($consent.isOpened = true),
       settings: computed({
@@ -15,12 +14,11 @@ export default {
             ? {}
             : JSON.parse(localStorage.getItem('consent') || '{}'),
         set: settings => {
-          if (isEqual(settings, $consent.settings)) {
-            return
-          }
-          localStorage.setItem('consent', JSON.stringify(settings))
           $consent.isOpened = false
-          window.location.reload()
+          if (!isEqual(settings, $consent.settings)) {
+            localStorage.setItem('consent', JSON.stringify(settings))
+            window.location.reload()
+          }
         },
       }),
       toggle: () => ($consent.isOpened = !$consent.isOpened),
