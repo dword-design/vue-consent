@@ -22,20 +22,20 @@
     "test": "base test"
   },
   "dependencies": {
-    "js-cookie": "^2.0.0",
+    "js-cookie": "^3.0.5",
     "lodash-es": "^4.17.21",
-    "parse-domain": "^3.0.0"
+    "parse-domain": "^8.0.1"
   },
   "devDependencies": {
-    "@dword-design/base": "^10.0.3",
+    "@dword-design/base": "^11.0.4",
     "@dword-design/functions": "^5.0.20",
-    "@dword-design/puppeteer": "^6.0.10",
+    "@dword-design/puppeteer": "^7.0.0",
     "@dword-design/tester": "^2.0.19",
-    "@dword-design/tester-plugin-puppeteer": "^2.1.68",
+    "@dword-design/tester-plugin-puppeteer": "^3.0.0",
     "@dword-design/tester-plugin-tmp-dir": "^2.1.26",
-    "execa": "^7.1.1",
+    "execa": "^8.0.1",
     "nuxt": "^3.5.2",
-    "nuxt-dev-ready": "^2.0.1",
+    "nuxt-dev-ready": "^3.0.0",
     "output-files": "^2.0.28",
     "tree-kill-promise": "^3.0.14"
   },
@@ -43,7 +43,7 @@
     "vue": "^3"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public"
